@@ -35,6 +35,7 @@ public class BoardDetailServlet extends HttpServlet {
             hbEntity.setIboard(iboard);
             req.setAttribute("isHeart", BoardHeartDAO.selIsHeart(hbEntity));
         }
+
         if(data.getWriter() != loginUserPk && nohits != 1) { //로그인 안 되어 있으면 0, 로그인 되어 있으면 pk값
             BoardDAO.updBoardHitUp(param);
         }

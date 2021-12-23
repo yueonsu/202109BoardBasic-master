@@ -32,12 +32,10 @@ public class BoardHeartServlet extends HttpServlet {
                 result = BoardHeartDAO.delBoardHeart(entity);
                 break;
         }
-        Gson gson = new Gson();
         res.setContentType("application/json");
         res.setCharacterEncoding("UTF-8");
-        String json = gson.toJson(result);
         PrintWriter out = res.getWriter();
-        out.println(json);
+        out.println(String.format("{\"result\" : %d }", result));
         out.flush();
     }
 }

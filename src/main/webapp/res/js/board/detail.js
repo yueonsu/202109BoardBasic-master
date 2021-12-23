@@ -43,7 +43,32 @@ if(cmtNewFrmElem) {
 
 var cmtListContainerElem = document.querySelector('#cmtListContainer');
 
-var heartElem = document.querySelector('.heart');
+// 좋아요 표시
+var heartElem = document.querySelector('#selHeart');
+selHeart();
+function selHeart() {
+    var loginUserPk = cmtListContainerElem.dataset.loginuserpk;
+    var data = heartElem.dataset.isheart;
+    setHeartDisplay(data, loginUserPk);
+}
+
+function setHeartDisplay(data, pk) {
+    var isHeart = data;
+    var selHeartElem = document.querySelector('#selHeart');
+    if(pk > 0) {
+        var iElem = document.createElement('p');
+        iElem.style.display = 'inline';
+        if (isHeart === 1) {
+            iElem.classList.add('fas', 'fa-heart');
+        } else {
+            iElem.classList.add('far', 'fa-heart');
+        }
+        iElem.style.cursor = 'pointer';
+        selHeartElem.appendChild(iElem);
+    }
+}
+
+// 좋아요 기능
 if(heartElem) {
     heartElem.addEventListener('click', function () {
         var value = heartElem.children[0].className;
@@ -140,12 +165,12 @@ if(cmtListContainerElem) {
             return res.json();
         }).then(function(data) {
             console.log(data);
-            displayCmt2(data);
+            displayCmt(data);
         }).catch(function (err) {
             console.log(err);
         })
     }
-    function displayCmt2(data) {
+    function displayCmt(data) {
         var tableElem = document.createElement('table');
         tableElem.innerHTML = `
             <tr>
@@ -217,25 +242,6 @@ if(cmtListContainerElem) {
         });
     }
 
-    function displayCmt(data) {
-        var tableElem = document.createElement('table');
-
-        var tr = document.createElement('tr');
-        var th1 = document.createElement('th');
-        th1.innerText = '내용';
-        var th2 = document.createElement('th');
-        th2.innerText = '작성자';
-        var th3 = document.createElement('th');
-        th3.innerText = '작성일';
-        var th4 = document.createElement('th');
-        th4.innerText = '비고';
-        tr.appendChild(th1);
-        tr.appendChild(th2);
-        tr.appendChild(th3);
-        tr.appendChild(th4);
-
-        tableElem.appendChild(tr);
-        cmtListContainerElem.appendChild(tableElem);
-    }
-    getList();
 }
+
+

@@ -13,19 +13,9 @@
         </div>
     </c:if>
 
-    <div>
-        <c:if test="${sessionScope.loginUser != null}">
-<%--            여기 안에서 시작하면 될 듯--%>
-            <c:choose>
-                <c:when test="${requestScope.isHeart == 1}">
-                    <a class="heart"><i class="fas fa-heart"></i></a>
-                </c:when>
-                <c:otherwise>
-                    <a class="heart"><i class="far fa-heart"></i></a>
-                </c:otherwise>
-            </c:choose>
-        </c:if>
-    </div>
+    <span id="selHeart" data-isheart="${requestScope.isHeart}">
+
+    </span>
 
     <div>글번호: ${requestScope.data.iboard}</div>
     <div>조회수 : <c:out value="${requestScope.data.hit}"/></div>
